@@ -1,0 +1,47 @@
+<!-- main/templates/main/gerenciar_veiculo.html -->
+
+{% extends 'main/base.html' %}
+{% load bootstrap4 %}
+{% load widget_tweaks %} <!-- Carrega o pacote django-widget-tweaks -->
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Editar Veículo</h2>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.placa.id_for_label }}">Placa</label>
+                {{ form.placa|add_class:"form-control" }} <!-- Usa o filtro add_class -->
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.modelo.id_for_label }}">Modelo</label>
+                {{ form.modelo|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.marca.id_for_label }}">Marca</label>
+                {{ form.marca|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.ano.id_for_label }}">Ano</label>
+                {{ form.ano|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.cor.id_for_label }}">Cor</label>
+                {{ form.cor|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.km_atual.id_for_label }}">KM Atual</label>
+                {{ form.km_atual|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Salvar Alterações</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

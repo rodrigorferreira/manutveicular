@@ -1,0 +1,66 @@
+<!-- main/templates/main/manutencoes.html -->
+
+{% extends 'main/base.html' %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Agendar Manutenção</h2>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.veiculo.id_for_label }}">Veículo</label>
+                {{ form.veiculo|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.descricao.id_for_label }}">Descrição</label>
+                {{ form.descricao|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.data_manutencao.id_for_label }}">Data da Manutenção</label>
+                {{ form.data_manutencao|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.status.id_for_label }}">Status</label>
+                {{ form.status|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Agendar</button>
+        </div>
+    </form>
+
+    <hr>
+    <h3 class="text-center mt-4">Manutenções Agendadas</h3>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Veículo</th>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for manutencao in manutencoes %}
+                <tr>
+                    <td>{{ manutencao.veiculo }}</td>
+                    <td>{{ manutencao.descricao }}</td>
+                    <td>{{ manutencao.data_manutencao|date:"d/m/Y" }}</td>
+                    <td>{{ manutencao.status }}</td>
+                    <td>
+                        <a href="{% url 'editar_manutencao' manutencao.id %}" class="btn btn-sm btn-warning">Editar</a>
+                        <!-- <a href="{% url 'excluir_manutencao' manutencao.id %}" class="btn btn-sm btn-danger">Excluir</a> -->
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+{% endblock %}

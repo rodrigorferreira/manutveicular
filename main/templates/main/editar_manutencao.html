@@ -1,0 +1,19 @@
+<!-- main/templates/main/editar_manutencao.html -->
+
+{% extends 'main/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Editar Manutenção</h2>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'manutencoes' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

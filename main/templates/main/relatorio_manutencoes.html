@@ -1,0 +1,33 @@
+<!-- main/templates/main/relatorio_manutencoes.html -->
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Relatório de Manutenções Agendadas</h1>
+    <!-- Botão de Imprimir -->
+    <!-- <button onclick="window.print()" class="btn btn-primary mb-4">Imprimir</button> -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Veículo</th>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th>Status</th>
+                <!-- Adicione outras colunas conforme necessário -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for manutencao in manutencoes %}
+            <tr>
+                <td>{{ manutencao.veiculo.placa }}</td>
+                <td>{{ manutencao.descricao }}</td>
+                <td>{{ manutencao.data_manutencao|date:"d/m/Y" }}</td>
+                <td>{{ manutencao.status }}</td>
+                <!-- Adicione outras células conforme necessário -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- Botão de Imprimir 2-->
+    <button onclick="window.print()" class="btn btn-primary mb-4">Imprimir</button>
+</div>
+{% endblock %}

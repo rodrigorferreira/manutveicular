@@ -1,0 +1,71 @@
+<!-- main/templates/main/base.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Manutenção Veicular{% endblock %}</title>
+    {% load static %}
+    {% load bootstrap4 %}
+    <!-- <link rel="stylesheet" href="{% static 'main/styles.css' %}"> -->
+    <!-- Carregar CSS do Bootstrap -->
+    {% bootstrap_css %}
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">Sistema de Manutenção Veicular</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Página Inicial</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'veiculos' %}">Veículos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'manutencoes' %}">Manutenções</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRelatorios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Relatórios
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownRelatorios">
+                                    <a class="dropdown-item" href="{% url 'relatorio_veiculos' %}">Veículos</a>
+                                    <a class="dropdown-item" href="{% url 'relatorio_manutencoes' %}">Manutenções</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <form action="{% url 'logout' %}" method="post" class="form-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'login' %}" class="btn btn-outline-light my-2 my-sm-0">Login</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main" class="container mt-4">
+        {% block content %}
+        <!-- Conteúdo específico das páginas -->
+        {% endblock %}
+    </main>
+    {% bootstrap_javascript jquery='full' %}
+</body>
+</html>
+    

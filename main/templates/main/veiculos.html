@@ -1,0 +1,53 @@
+<!-- main/templates/main/veiculos.html -->
+{% extends 'main/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">{{ veiculo_id|default:"Novo" }} Veículo</h2>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            {% if veiculo_id %}
+            <a href="{% url 'veiculos' %}" class="btn btn-secondary">Cancelar</a>
+            {% endif %}
+        </div>
+    </form>
+    <hr>
+    <h3 class="text-center">Veículos Cadastrados</h3>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Ano</th>
+                <th>Cor</th>
+                <th>KM Atual</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for veiculo in veiculos %}
+            <tr>
+                <td>{{ veiculo.placa }}</td>
+                <td>{{ veiculo.modelo }}</td>
+                <td>{{ veiculo.marca }}</td>
+                <td>{{ veiculo.ano }}</td>
+                <td>{{ veiculo.cor }}</td>
+                <td>{{ veiculo.km_atual }}</td>
+                <td>
+                    <a href="{% url 'editar_veiculo' veiculo.id %}" class="btn btn-sm btn-warning">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- Adiciona um link para a página de veículos agendados -->
+    <div class="text-center mt-4">
+        <a href="{% url 'veiculos_agendados' %}" class="btn btn-info">Ver Veículos Agendados</a>
+    </div>
+</div>
+{% endblock %}

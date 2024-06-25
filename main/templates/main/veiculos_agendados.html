@@ -1,0 +1,35 @@
+<!-- main/templates/main/veiculos_agendados.html -->
+{% extends 'main/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Veículos Agendados</h2>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Ano</th>
+                <th>Cor</th>
+                <th>KM Atual</th>
+                <th>Data da Manutenção</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for veiculo in veiculos %}
+            <tr>
+                <td>{{ veiculo.placa }}</td>
+                <td>{{ veiculo.modelo }}</td>
+                <td>{{ veiculo.marca }}</td>
+                <td>{{ veiculo.ano }}</td>
+                <td>{{ veiculo.cor }}</td>
+                <td>{{ veiculo.km_atual }}</td>
+                <td>{{ veiculo.manutencao.data_manutencao }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
